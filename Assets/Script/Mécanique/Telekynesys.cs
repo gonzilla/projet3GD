@@ -56,5 +56,8 @@ public class Telekynesys : PersonnalMethod
     {
         GO = true;//dis au cube de venir
         GDDP.Using_Tele = false;//dis au systeme que je ne ramene plus des petis cube
+        
     }
+
+   
 }

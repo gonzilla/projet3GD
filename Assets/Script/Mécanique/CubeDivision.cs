@@ -14,13 +14,15 @@ public class CubeDivision : PersonnalMethod
     float LengthOriginel; // longueur du cube
     float lengthOfNewCube; // longueur du petit cube
     GestionDataNonJoueur GDNJ;
-    
+
+   
+
     List<GameObject> CubeExplosions = new List<GameObject>();
 
 
     private void Awake()
     {
-        
+       
         GoFindDataNonJoueur(out GDNJ);// methode personnel
     }
 
@@ -46,7 +48,7 @@ public class CubeDivision : PersonnalMethod
     public void ActivateDivision() 
     {
        
-
+        
         for (int x = 0; x < GDNJ.NombreDecube; x++) // triple pour ligne/colonne/profondeur
         {
             for (int y = 0; y < GDNJ.NombreDecube; y++)
@@ -57,8 +59,7 @@ public class CubeDivision : PersonnalMethod
                 }
             }
         }
-
-       
+        
         Activate = false;//A fini la subdivision
         GenerateExplosions();//fais l'explosion
         Destroy(this.gameObject); // Détruit l'objet
@@ -68,8 +69,10 @@ public class CubeDivision : PersonnalMethod
     void createMiniCube(Vector3 cordonnate) // fonction créer le cube
     {
 
-        
+        //le parent objet vide
+
         GameObject CUBE = GameObject.CreatePrimitive(PrimitiveType.Cube);//creer le cube
+        
         //CUBE.transform.parent = this.gameObject.transform;
         CUBE.layer = LayerCube;//set le layer du cube
         CubeExplosions.Add(CUBE);//ajout le game object dans la liste
