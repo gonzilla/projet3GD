@@ -49,7 +49,7 @@ public class GrappinV2 : MonoBehaviour
         //ObjetToGo = Info.transform.gameObject;
         CordonnateToRush = Info.point;//recupére la position
         Direction = CordonnateToRush - transform.position;//calcul de la direction
-        if (CF==null)//si il n y'a  pas une constante force
+       if (CF==null)//si il n y'a  pas une constante force
         {
             CF = this.gameObject.AddComponent<ConstantForce>();//ajoute une constante force
         }
@@ -88,10 +88,14 @@ public class GrappinV2 : MonoBehaviour
     void setLineRenderer() //set le linerender
     {
         LR = gameObject.AddComponent<LineRenderer>();//ajoute le component
-        LR.SetPosition(0, transform.position);//set le point 0
-        LR.SetPosition(1, CordonnateToRush);//set le point 1
-        LR.startWidth = 0.25f;//la "grosseur" de corde
-        LR.material = Mat_Corde;//met le material
+        if (LR != null)
+        {
+            LR.SetPosition(0, transform.position);//set le point 0
+            LR.SetPosition(1, CordonnateToRush);//set le point 1
+            LR.startWidth = 0.25f;//la "grosseur" de corde
+            LR.material = Mat_Corde;//met le material
+        }
+        
     }
     void UpdateLineRenderer()// update le linerender
     {

@@ -11,10 +11,20 @@ public class GestionDataNonJoueur : MonoBehaviour
     public int NombreDecube; // le nombre de cube
     public List<Rigidbody> MesPetitsCube = new List<Rigidbody>();
     public List<Telekynesys> telekynesysScript = new List<Telekynesys>();
-    public float DiminutionVitesseParCube;
+    /*public float DiminutionVitesseParCube;
     public float DistanceGrappinSuppParCube;
     public float VitesseGrappinParCube;
-    public float ForceDeSautEnMoinsParCube;
+    public float ForceDeSautEnMoinsParCube;*/
+
+    public int nombreDeGrosCubeMax;
+    public float poidsCube;
+    public float forceByCube;
+    public float forceJumpByCube;
+    public AnimationCurve VitesseScalling;
+
+
+    [Header("Autre")]
+    public CinemachineChangement CC;
 
     //Local variable
 

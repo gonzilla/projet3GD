@@ -12,24 +12,46 @@ public class TempRoller : PersonnalMethod
     GestionDesDatasPlayer MyGDDP;
     DeplacementJ DJ;
     GrappinV2 G2;
+    Rigidbody RbPlayer;
     //
     float intitalSpeedHook, InitialSpeedDeplacement, InitialForcejump, InitialDistanceGrappin;
-    float NewSpeedHook, NewSpeedDeplacement, NewJumpForce, NewDistanceGrappin;
+    //float NewSpeedHook, NewSpeedDeplacement, NewJumpForce, NewDistanceGrappin;
+    float massOriginal;
+    float SpeedRollerOriginal;
+    float JumpForceOri;
     int nombreDeCube ;
     void Start()
     {
         setValueInitial();
+        
     }
 
     
     
     public void GestionRoller() 
     {
-        //Calcul des nouvelle variables
-        nombreDeCube = MyGDNJ.MesPetitsCube.Count;
-        NewSpeedHook =intitalSpeedHook-(MyGDNJ.VitesseGrappinParCube * nombreDeCube);
-        NewSpeedDeplacement =InitialSpeedDeplacement - (MyGDNJ.DiminutionVitesseParCube * nombreDeCube);
-        NewJumpForce = InitialForcejump - (MyGDNJ.ForceDeSautEnMoinsParCube*nombreDeCube);
+        nombreDeCube = MyGDNJ.MesPetitsCube.Count;//
+        //Change le poids du joueur
+        RbPlayer.mass = massOriginal + MyGDNJ.poidsCube*nombreDeCube;
+        if (nombreDeCube>0)
+        {
+            DJ.F_SpeedDeplacementRoller = SpeedRollerOriginal + nombreDeCube*MyGDNJ.forceByCube * MyGDNJ.VitesseScalling.Evaluate((float)nombreDeCube / (MyGDNJ.nombreDeGrosCubeMax * 27));
+            DJ.F_JumpForce = JumpForceOri + nombreDeCube * MyGDNJ.forceJumpByCube * MyGDNJ.VitesseScalling.Evaluate((float)nombreDeCube / (MyGDNJ.nombreDeGrosCubeMax * 27));
+            //print((float)nombreDeCube / (MyGDNJ.nombreDeGrosCubeMax * 27));
+            //print(DJ.F_SpeedDeplacementRoller);
+        }
+        else 
+        {
+            DJ.F_SpeedDeplacementRoller = SpeedRollerOriginal;
+        }
+
+        
+
+        //
+
+        /*NewSpeedHook = intitalSpeedHook - (MyGDNJ.VitesseGrappinParCube * nombreDeCube);
+        NewSpeedDeplacement = InitialSpeedDeplacement - (MyGDNJ.DiminutionVitesseParCube * nombreDeCube);
+        NewJumpForce = InitialForcejump - (MyGDNJ.ForceDeSautEnMoinsParCube * nombreDeCube);
         NewDistanceGrappin = InitialDistanceGrappin + (MyGDNJ.DistanceGrappinSuppParCube * nombreDeCube);
         //Impose des limites
         if (NewSpeedHook < 15)
@@ -48,11 +70,11 @@ public class TempRoller : PersonnalMethod
         //Applications des variables
         G2.SpeedHook = NewSpeedHook;
         DJ.F_SpeedDeplacementClassic = NewSpeedDeplacement;
-        DJ.F_JumpForce=NewJumpForce;
+        DJ.F_JumpForce = NewJumpForce;
         MyGDDP.DistanceMaxGrappin = NewDistanceGrappin;
-        ActiveRoller();
+        ActiveRoller();*/
     }
-    
+
 
     void setValueInitial() // récupére les variables dans leurs états d'origine
     {
@@ -60,7 +82,10 @@ public class TempRoller : PersonnalMethod
         GoFindDataPlayer(out MyGDDP);//methode perso
         DJ = GetComponent<DeplacementJ>();
         G2 = GetComponent<GrappinV2>();
-
+        RbPlayer = GetComponent<Rigidbody>();
+        massOriginal = RbPlayer.mass;
+        SpeedRollerOriginal = DJ.F_SpeedDeplacementRoller;
+        JumpForceOri = DJ.F_JumpForce;
 
         InitialDistanceGrappin = MyGDDP.DistanceMaxGrappin;
         InitialForcejump = DJ.F_JumpForce;
@@ -83,7 +108,7 @@ public class TempRoller : PersonnalMethod
     
     }
 }
-//Précédent systeme
+//Précédent systeme V1
 /*if (MyGDNJ.MesPetitsCube.Count>0 && MyGDNJ.MesPetitsCube.Count <28)
        {
            print("Bonus");
@@ -109,3 +134,30 @@ public class TempRoller : PersonnalMethod
            NewDistanceGrappin = InitialDistanceGrappin;
 
        }*/
+/*Précédent systeme V2
+ /Calcul des nouvelle variables
+nombreDeCube = MyGDNJ.MesPetitsCube.Count;
+        NewSpeedHook =intitalSpeedHook-(MyGDNJ.VitesseGrappinParCube* nombreDeCube);
+        NewSpeedDeplacement =InitialSpeedDeplacement - (MyGDNJ.DiminutionVitesseParCube* nombreDeCube);
+        NewJumpForce = InitialForcejump - (MyGDNJ.ForceDeSautEnMoinsParCube* nombreDeCube);
+        NewDistanceGrappin = InitialDistanceGrappin + (MyGDNJ.DistanceGrappinSuppParCube* nombreDeCube);
+        //Impose des limites
+        if (NewSpeedHook< 15)
+        {
+            NewSpeedHook = 15;
+        }
+        if (NewSpeedDeplacement< 3)
+        {
+            NewSpeedDeplacement = 3;
+        }
+        if (NewJumpForce< 2)
+        {
+            NewJumpForce = 2;
+        }
+        print("Ma new speedHook" + NewSpeedHook + " New SpeedDeplacement" + NewSpeedDeplacement + " jumpForce" + NewJumpForce);
+//Applications des variables
+G2.SpeedHook = NewSpeedHook;
+        DJ.F_SpeedDeplacementClassic = NewSpeedDeplacement;
+        DJ.F_JumpForce=NewJumpForce;
+        MyGDDP.DistanceMaxGrappin = NewDistanceGrappin;
+        ActiveRoller();*/

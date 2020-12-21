@@ -318,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 2.5, z: -5}
   m_XDamping: 1
   m_YDamping: 1
@@ -334,18 +334,18 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 1
+    m_WaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: 45
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -442,7 +442,7 @@ MonoBehaviour:
   Cible: {fileID: 2033958297}
   Using_Tele: 0
   DistanceMaxGrappin: 50
-  InAir: 0
+  SpeedRoller: 0
 --- !u!114 &45362787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,8 +472,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   F_SpeedDeplacementClassic: 8
   F_JumpForce: 10
-  F_SortieDeGrappin: 0
+  F_SpeedDeplacementRoller: 0
   CanMoveBasic: 1
+  maCamera: {fileID: 0}
 --- !u!114 &45362789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,7 +1515,7 @@ GameObject:
   - component: {fileID: 351926900}
   - component: {fileID: 351926899}
   - component: {fileID: 351926898}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -1689,7 +1690,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 357345901}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: -7.62, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1699,8 +1700,8 @@ Transform:
   - {fileID: 654984641}
   - {fileID: 263114558}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!54 &357345906
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1731,8 +1732,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   F_SpeedDeplacementClassic: 8
   F_JumpForce: 10
-  F_SortieDeGrappin: 0
+  F_SpeedDeplacementRoller: 10
   CanMoveBasic: 1
+  maCamera: {fileID: 963194227}
 --- !u!114 &357345908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1776,7 +1778,7 @@ MonoBehaviour:
   Cible: {fileID: 341567605}
   Using_Tele: 0
   DistanceMaxGrappin: 50
-  InAir: 0
+  SpeedRoller: 0
 --- !u!114 &357345910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2674,7 +2676,7 @@ GameObject:
   - component: {fileID: 468182082}
   - component: {fileID: 468182081}
   - component: {fileID: 468182080}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (5)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -2892,7 +2894,7 @@ GameObject:
   - component: {fileID: 576033067}
   - component: {fileID: 576033066}
   - component: {fileID: 576033065}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (14)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -3110,7 +3112,7 @@ GameObject:
   - component: {fileID: 647372711}
   - component: {fileID: 647372710}
   - component: {fileID: 647372709}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (11)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -3351,7 +3353,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675447517}
-  m_LocalRotation: {x: 0.06491944, y: -0.03656929, z: 0.0023806717, w: 0.9972174}
+  m_LocalRotation: {x: -0.060018066, y: -0.3818751, z: 0.024860304, w: -0.921928}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4588,7 +4590,7 @@ GameObject:
   - component: {fileID: 848811866}
   - component: {fileID: 848811865}
   - component: {fileID: 848811864}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (6)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -4681,7 +4683,7 @@ GameObject:
   - component: {fileID: 851977580}
   - component: {fileID: 851977579}
   - component: {fileID: 851977578}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (8)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -5184,8 +5186,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0
-  m_VerticalDamping: 0
+  m_HorizontalDamping: 0.5
+  m_VerticalDamping: 0.5
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -5207,7 +5209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 2.5, z: -5}
   m_XDamping: 1
   m_YDamping: 1
@@ -5223,18 +5225,18 @@ MonoBehaviour:
     m_Bias: 0
   m_RecenterToTargetHeading:
     m_enabled: 0
-    m_WaitTime: 1
+    m_WaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: 45
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -5464,13 +5466,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.093454145, y: -0.03648612, z: 0.0034270892, w: 0.9949489}
-  m_LocalPosition: {x: -7.253779, y: 3.5, z: -4.9865704}
+  m_LocalRotation: {x: 0.086398415, y: 0.38100642, z: -0.035787392, w: 0.9198308}
+  m_LocalPosition: {x: -11.155534, y: 3.5, z: -3.5355337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 20.535002, y: 0, z: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 10.732, y: 180, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6170,7 +6172,7 @@ GameObject:
   - component: {fileID: 1107332630}
   - component: {fileID: 1107332629}
   - component: {fileID: 1107332628}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (3)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -6263,7 +6265,7 @@ GameObject:
   - component: {fileID: 1121269712}
   - component: {fileID: 1121269711}
   - component: {fileID: 1121269710}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Nez
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6356,7 +6358,7 @@ GameObject:
   - component: {fileID: 1146543246}
   - component: {fileID: 1146543245}
   - component: {fileID: 1146543244}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (2)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -6523,7 +6525,7 @@ GameObject:
   - component: {fileID: 1216142215}
   - component: {fileID: 1216142214}
   - component: {fileID: 1216142213}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (12)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -6616,7 +6618,7 @@ GameObject:
   - component: {fileID: 1226868785}
   - component: {fileID: 1226868784}
   - component: {fileID: 1226868783}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (9)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -6709,7 +6711,7 @@ GameObject:
   - component: {fileID: 1232692367}
   - component: {fileID: 1232692366}
   - component: {fileID: 1232692365}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane (1)
   m_TagString: Inmovable
   m_Icon: {fileID: 0}
@@ -6857,7 +6859,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250966325}
-  m_LocalRotation: {x: 0.122101195, y: -0.036372133, z: 0.0044775447, w: 0.9918409}
+  m_LocalRotation: {x: 0.112882614, y: 0.3798162, z: -0.04675752, w: 0.91695744}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -7785,7 +7787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 2.5, z: -5}
   m_XDamping: 1
   m_YDamping: 1
@@ -7800,19 +7802,19 @@ MonoBehaviour:
     m_VelocityFilterStrength: 4
     m_Bias: 0
   m_RecenterToTargetHeading:
-    m_enabled: 0
-    m_WaitTime: 1
+    m_enabled: 1
+    m_WaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: 45
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -7885,10 +7887,44 @@ MonoBehaviour:
   NombreDecube: 3
   MesPetitsCube: []
   telekynesysScript: []
-  DiminutionVitesseParCube: 0.1
-  DistanceGrappinSuppParCube: 0.1
-  VitesseGrappinParCube: 0.1
-  ForceDeSautEnMoinsParCube: 0.1
+  nombreDeGrosCubeMax: 5
+  poidsCube: 0.1
+  forceByCube: 1
+  forceJumpByCube: 1
+  VitesseScalling:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.03806017
+      outSlope: -0.03806017
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.10921415
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0.0036886388
+      outSlope: -0.0036886388
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.12234998
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.040254623
+      outSlope: 0.040254623
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09841279
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CC: {fileID: 2101600597}
 --- !u!1 &1580694669
 GameObject:
   m_ObjectHideFlags: 0
@@ -7901,7 +7937,7 @@ GameObject:
   - component: {fileID: 1580694672}
   - component: {fileID: 1580694671}
   - component: {fileID: 1580694670}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (10)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -8119,7 +8155,7 @@ GameObject:
   - component: {fileID: 1652517412}
   - component: {fileID: 1652517411}
   - component: {fileID: 1652517410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Plane
   m_TagString: Inmovable
   m_Icon: {fileID: 0}
@@ -8267,7 +8303,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653777634}
-  m_LocalRotation: {x: 0.09345416, y: -0.036486078, z: 0.0034267514, w: 0.994949}
+  m_LocalRotation: {x: 0.0863983, y: 0.38100642, z: -0.035787676, w: 0.9198308}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8287,7 +8323,7 @@ GameObject:
   - component: {fileID: 1695841950}
   - component: {fileID: 1695841949}
   - component: {fileID: 1695841948}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (13)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -9066,7 +9102,7 @@ GameObject:
   - component: {fileID: 1823599686}
   - component: {fileID: 1823599685}
   - component: {fileID: 1823599684}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (4)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -9807,7 +9843,7 @@ GameObject:
   - component: {fileID: 1986517626}
   - component: {fileID: 1986517625}
   - component: {fileID: 1986517624}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (7)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -9900,7 +9936,7 @@ GameObject:
   - component: {fileID: 1991322051}
   - component: {fileID: 1991322050}
   - component: {fileID: 1991322049}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mur (1)
   m_TagString: Mur
   m_Icon: {fileID: 0}
@@ -10147,6 +10183,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2101600595}
   - component: {fileID: 2101600594}
+  - component: {fileID: 2101600596}
+  - component: {fileID: 2101600597}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -10191,12 +10229,12 @@ MonoBehaviour:
   m_LegacyBlendHint: 0
   m_YAxis:
     Value: 0.5
-    m_MaxSpeed: 2
+    m_MaxSpeed: 1
     m_AccelTime: 0.2
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -10207,19 +10245,19 @@ MonoBehaviour:
       m_LegacyHeadingDefinition: -1
       m_LegacyVelocityFilterStrength: -1
   m_YAxisRecentering:
-    m_enabled: 0
+    m_enabled: 1
     m_WaitTime: 1
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
-    Value: 0
+    Value: 45
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -10234,12 +10272,12 @@ MonoBehaviour:
     m_VelocityFilterStrength: 4
     m_Bias: 0
   m_RecenterToTargetHeading:
-    m_enabled: 0
-    m_WaitTime: 1
+    m_enabled: 1
+    m_WaitTime: 5
     m_RecenteringTime: 2
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
-  m_BindingMode: 5
+  m_BindingMode: 4
   m_SplineCurvature: 0.334
   m_Orbits:
   - m_Height: 4.5
@@ -10261,15 +10299,66 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101600593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.253779, y: 3.5, z: -4.9865704}
+  m_LocalPosition: {x: -11.155534, y: 3.5, z: -3.5355337}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1250966327}
   - {fileID: 1653777636}
   - {fileID: 675447519}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2101600596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101600593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 1025
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.1
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
+--- !u!114 &2101600597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2101600593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b303fad2a47a84542ab7b627ea60b1c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 357345905}
+  LimAngleNeg: -90
+  LimAnglePos: 90
+  ValueRangeMoving:
+  - -360
+  - 360
+  ValueRangeNotMoving:
+  - -180
+  - 180
 --- !u!1 &2134375827
 GameObject:
   m_ObjectHideFlags: 0

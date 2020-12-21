@@ -102,8 +102,13 @@ public class InputSystem : PersonnalMethod
             
             if (MyGDNJ.MesPetitsCube.Count>0 && !MyGDDP.Using_Tele)//si dans mes data j'ai des cubes
             {
+                foreach (Telekynesys item in MyGDNJ.telekynesysScript)//à changer lorsque vrais controle
+                {
+                    item.changeLayerBack();
+                }
                 GDF.LancerDeBoule(thisRay.direction);//lance la boule
                 TR.GestionRoller();//desactive roller
+                
             }
         }
 
@@ -113,15 +118,24 @@ public class InputSystem : PersonnalMethod
             
             float X= Input.GetAxis(Axes[0]);//valeur de pression de l'input
             float Z= Input.GetAxis(Axes[1]);//valeur de pression de l'input
-            DJ.DeplacementClassic(X, Z);// demande d'utiliser le systeme de depalcment calssic et lui transmet les valeurs necessaire
-           
+            if (MyGDNJ.telekynesysScript.Count==0)
+            {
+                DJ.DeplacementClassic(X, Z);// demande d'utiliser le systeme de depalcment calssic et lui transmet les valeurs necessaire
+            }
+            else if (MyGDNJ.telekynesysScript.Count > 0)
+            {
+                DJ.DeplacementRoller(X, Z);
+            }
+           // MyGDNJ.CC.Limitation(true);
+
 
         }
-        
-        /*if (Input.GetAxis(Axes[2]) != 0)
+        else if (Input.GetAxis(Axes[0]) == 0 || Input.GetAxis(Axes[1]) == 0)
         {
-            Grap.ChangementLongueurGrappin(Input.GetAxis(Axes[2]));
-        }*/
+            //MyGDNJ.CC.Limitation(false);
+        }
+        
+      
     }
 
 
@@ -141,3 +155,7 @@ public class InputSystem : PersonnalMethod
 
 
 }
+/*if (Input.GetAxis(Axes[2]) != 0)
+      {
+          Grap.ChangementLongueurGrappin(Input.GetAxis(Axes[2]));
+      }*/

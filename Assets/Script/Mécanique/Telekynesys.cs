@@ -59,5 +59,9 @@ public class Telekynesys : PersonnalMethod
         
     }
 
+    public void changeLayerBack() 
+    {
+        this.gameObject.layer = 0;
+    }
    
 }

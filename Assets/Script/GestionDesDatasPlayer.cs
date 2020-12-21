@@ -17,8 +17,13 @@ public class GestionDesDatasPlayer : MonoBehaviour
     [Header("Grappin")]
     public float DistanceMaxGrappin;
 
-    [Header("Autre")]
-    public bool InAir;
+    //[Header("Autre")]
+    //public bool InAir;
+
+    [Header("Déplacement")]
+    public float SpeedRoller;
+
+
     //Local variable
 
     void Start()
