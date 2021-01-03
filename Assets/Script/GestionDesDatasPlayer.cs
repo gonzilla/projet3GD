@@ -23,7 +23,8 @@ public class GestionDesDatasPlayer : MonoBehaviour
     [Header("Déplacement")]
     public float SpeedRoller;
 
-
+    [Header("InputSystem")]
+    [HideInInspector] public bool Vise=false;
     //Local variable
 
     void Start()
