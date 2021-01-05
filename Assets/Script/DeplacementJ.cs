@@ -42,8 +42,8 @@ public class DeplacementJ : PersonnalMethod
                 float targetAngle = Mathf.Atan2(X, Z) * Mathf.Rad2Deg + maCamera.transform.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             }
+            Vector3 direction = transform.TransformDirection(Vector3.forward) + new Vector3(0, RbPlayer.velocity.y, 0);
             
-            //Vector3 depla =new Vector3 (0 , RbPlayer.velocity.y, transform.TransformDirection(Vector3.forward).z);
             RbPlayer.velocity = transform.TransformDirection(Vector3.forward) * F_SpeedDeplacementClassic;
         }
        
