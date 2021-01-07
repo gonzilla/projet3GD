@@ -56,7 +56,11 @@ public class DeplacementJ : PersonnalMethod
             Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y*signe);
             RbPlayer.velocity = transform.TransformDirection(FutureVelocity);//fais en sorte qu'il le fasse de maniére local*/
 
-           
+           // bug de x
+
+
+
+
         }
        
 
