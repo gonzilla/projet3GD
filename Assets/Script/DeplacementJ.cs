@@ -53,7 +53,7 @@ public class DeplacementJ : PersonnalMethod
             }
             float signe = Z / Mathf.Abs(Z);
             ClampVelocitySpeed = ClampVelocitySpeed * F_SpeedDeplacementClassic;// multiplie celle par la valeur souhaiter
-            Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y* signe);
+            Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y*signe);
             RbPlayer.velocity = transform.TransformDirection(FutureVelocity);//fais en sorte qu'il le fasse de maniére local*/
 
            // bug de x
