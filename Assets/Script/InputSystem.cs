@@ -49,7 +49,7 @@ public class InputSystem : PersonnalMethod
         maskToIgnore= ~(1<< LayerPetitCube);//set la valeur du layer physique
     }
 
-    void Update()
+    void FixedUpdate()
     {
         
         Ray thisRay = MaCam.ScreenPointToRay(Input.mousePosition);// le ray
