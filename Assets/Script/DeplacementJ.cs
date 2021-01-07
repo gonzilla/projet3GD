@@ -30,7 +30,8 @@ public class DeplacementJ : PersonnalMethod
     
     
 
-    public void DeplacementClassic(float X,float Z)//Lance le déplacement
+    public void DeplacementClassic(float X,float Z)//Lance le déplacement //marche un peu par magie noir en vrais
+
     {
         //print(CanMove);
         if (!Grap.Activate && CanMoveBasic)
@@ -42,9 +43,20 @@ public class DeplacementJ : PersonnalMethod
                 float targetAngle = Mathf.Atan2(X, Z) * Mathf.Rad2Deg + maCamera.transform.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             }
-            Vector3 direction = transform.TransformDirection(Vector3.forward) + new Vector3(0, RbPlayer.velocity.y, 0);
+            X = 0;
+           
+            Vector2 ClampVelocitySpeed = new Vector2(X, Z);// à changer RbPlayer pour le jump //créer un vecteur pour la velocité
+            float calculatedMagnitude = Mathf.Sqrt(X * X + Z * Z);//calcul de la magnitude
+            if (calculatedMagnitude >= 1)// si la magnitude est supérrieur a 1
+            {
+                ClampVelocitySpeed = ClampVelocitySpeed.normalized; //la remet a 1
+            }
             
-            RbPlayer.velocity = transform.TransformDirection(Vector3.forward) * F_SpeedDeplacementClassic;
+            ClampVelocitySpeed = ClampVelocitySpeed * F_SpeedDeplacementClassic;// multiplie celle par la valeur souhaiter
+            Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y);
+            RbPlayer.velocity = transform.TransformDirection(FutureVelocity);//fais en sorte qu'il le fasse de maniére local*/
+
+           
         }
        
 
