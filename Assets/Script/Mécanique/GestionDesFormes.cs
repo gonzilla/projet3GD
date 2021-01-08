@@ -8,7 +8,7 @@ public class GestionDesFormes : PersonnalMethod
     //Public Variable
     public float ForceDeLancer;
     //Local variable
-
+  
     GestionDataNonJoueur MyGDNJ;
     
     void Awake()
@@ -31,11 +31,19 @@ public class GestionDesFormes : PersonnalMethod
             
             Cubies.AddForce(DirectionDeLancer*ForceDeLancer,ForceMode.Impulse);// lui donne une force pour l'expulser
         }
+        
         MyGDNJ.telekynesysScript.Clear();//clear dans  data
         MyGDNJ.MesPetitsCube.Clear();//clear  dans data
-
+        Invoke("lancerDeBoolAfter",0.3f);
     }
      
-    
+    void lancerDeBoolAfter() 
+    {
+        foreach (Telekynesys item in MyGDNJ.telekynesysScript)//à changer lorsque vrais controle
+        {
+            item.changeLayerBack();
+        }
+
+    }
     
 }

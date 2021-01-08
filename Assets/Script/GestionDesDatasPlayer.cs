@@ -22,19 +22,12 @@ public class GestionDesDatasPlayer : MonoBehaviour
 
     [Header("Déplacement")]
     public float SpeedRoller;
+    public float DistanceCaméraPoint;
+    public float ForceDash;
 
     [Header("InputSystem")]
     [HideInInspector] public bool Vise=false;
     //Local variable
 
-    void Start()
-    {
-        
-    }
-
     
-    void Update()
-    {
-        
-    }
 }

@@ -943,6 +943,8 @@ MonoBehaviour:
   Using_Tele: 0
   DistanceMaxGrappin: 50
   SpeedRoller: 0
+  "DistanceCam\xE9raPoint": 0
+  ForceDash: 0
   Vise: 0
 --- !u!114 &45362787
 MonoBehaviour:
@@ -5227,6 +5229,7 @@ Transform:
   - {fileID: 893473063}
   - {fileID: 654984641}
   - {fileID: 263114558}
+  - {fileID: 602428231}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5260,7 +5263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   F_SpeedDeplacementClassic: 8
   F_JumpForce: 10
-  F_SpeedDeplacementRoller: 10
+  F_SpeedDeplacementRoller: 30
   CanMoveBasic: 1
   maCamera: {fileID: 963194227}
 --- !u!114 &357345908
@@ -5278,7 +5281,7 @@ MonoBehaviour:
   MaCam: {fileID: 963194227}
   LayerPetitCube: 8
   GDDP: {fileID: 357345909}
-  Touches: 43010000200000004401000045010000
+  Touches: 4301000020000000440100004501000030010000
   TimeMaintenueTouche: []
   TimePressionTouche: []
   Axes:
@@ -5306,7 +5309,9 @@ MonoBehaviour:
   Cible: {fileID: 341567605}
   Using_Tele: 0
   DistanceMaxGrappin: 50
-  SpeedRoller: 0
+  SpeedRoller: 10
+  "DistanceCam\xE9raPoint": 10
+  ForceDash: 50
   Vise: 0
 --- !u!114 &357345910
 MonoBehaviour:
@@ -9118,6 +9123,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 40.965, z: 0}
+--- !u!1 &602428230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602428231}
+  - component: {fileID: 602428232}
+  m_Layer: 9
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &602428231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602428230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.22, y: 0.39, z: 0.77}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 357345905}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &602428232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602428230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1077a8e8eb354334b87f75f304f67658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &615301925
 GameObject:
   m_ObjectHideFlags: 0
@@ -10103,7 +10151,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 675447517}
-  m_LocalRotation: {x: 0.064963095, y: -6.8650535e-10, z: 0.000000010545302, w: 0.9978877}
+  m_LocalRotation: {x: 0.06496309, y: -6.865055e-10, z: 0.000000010545302, w: 0.9978877}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15579,7 +15627,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.12218324, y: -0.000000035206092, z: 0.0000000043340673, w: 0.9925076}
+  m_LocalRotation: {x: 0.122183286, y: 0.000000035206092, z: -0.000000004334069, w: 0.9925076}
   m_LocalPosition: {x: 1589.25, y: 26.97, z: -45.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -23501,6 +23549,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CC: {fileID: 2101600597}
+  Trans_PositionSpawn: {fileID: 602428231}
+  F_tailleDuCube: 0.3
+  F_VitesseElement: 100
+  Mat_materialImpact: {fileID: 2100000, guid: 3b6f7e5bc895f3f4cbbd102275df60ad, type: 2}
+  B_Coller: 0
 --- !u!1 &1580556937
 GameObject:
   m_ObjectHideFlags: 0
@@ -24879,7 +24932,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1653777634}
-  m_LocalRotation: {x: -0.12218325, y: 0.00000001374481, z: 0.000000029173805, w: -0.9925076}
+  m_LocalRotation: {x: -0.12218327, y: -0.000000021461027, z: 0.000000033505795, w: -0.9925076}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -30968,12 +31021,12 @@ MonoBehaviour:
   m_BindingMode: 4
   m_SplineCurvature: 0.5
   m_Orbits:
-  - m_Height: 4.5
-    m_Radius: 3.77
+  - m_Height: 5.62
+    m_Radius: 6.13
   - m_Height: 2.5
     m_Radius: 5
   - m_Height: -0.11
-    m_Radius: 4.03
+    m_Radius: 7.24
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 1250966326}

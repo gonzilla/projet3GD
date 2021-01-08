@@ -26,6 +26,14 @@ public class GestionDataNonJoueur : MonoBehaviour
     [Header("Autre")]
     public CinemachineChangement CC;
 
+
+    [Header("ElementVisuel")]
+    public Transform Trans_PositionSpawn;
+    public float F_tailleDuCube;
+    public float F_VitesseElement;
+    public Material Mat_materialImpact;
+    public bool B_Coller;
+
     //Local variable
 
     /*private void Update()
