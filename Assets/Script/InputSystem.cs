@@ -30,6 +30,7 @@ public class InputSystem : PersonnalMethod
     GrappinV2 Grap;
     CubeDivision CD;
     TempRoller TR;
+    ElementsVisuelle EV;
     RaycastHit hittedCam;//stock la valeur du raycast
     int maskToIgnore;//le mask a ignoré pour le raycast
      void Awake()
@@ -45,11 +46,12 @@ public class InputSystem : PersonnalMethod
         CD = GetComponent<CubeDivision>();
         GDF = GetComponent<GestionDesFormes>();
         TR = GetComponent<TempRoller>();
+        EV =GameObject.Find("Gun").GetComponent<ElementsVisuelle>() ; 
         MAJ_Tab();//met à jour la longueur des tableau 
         maskToIgnore= ~(1<< LayerPetitCube);//set la valeur du layer physique
     }
 
-    void FixedUpdate()
+    void Update()
     {
         
         Ray thisRay = MaCam.ScreenPointToRay(Input.mousePosition);// le ray
@@ -137,13 +139,30 @@ public class InputSystem : PersonnalMethod
             }
         }
 
-
-        if (Input.GetAxis(Axes[0])!=0||Input.GetAxis(Axes[1]) != 0)//si l'un de ces deux inputs est différent de 0
+        if (Input.GetKeyDown(Touches[4]))
         {
+            if (MyGDNJ.MesPetitsCube.Count>0)// si j'ai des cubes sur moi
+            {
+                
+                DJ.Dash(thisRay);//lance le dash
+                TR.GestionRoller();//desactive roller
+            }
             
-            float X= Input.GetAxis(Axes[0]);//valeur de pression de l'input
-            float Z= Input.GetAxis(Axes[1]);//valeur de pression de l'input
-            if (MyGDNJ.telekynesysScript.Count==0)
+        }
+        
+      
+    }
+
+
+    private void FixedUpdate()
+    {
+
+        if (Input.GetAxis(Axes[0]) != 0 || Input.GetAxis(Axes[1]) != 0)//si l'un de ces deux inputs est différent de 0
+        {
+
+            float X = Input.GetAxis(Axes[0]);//valeur de pression de l'input
+            float Z = Input.GetAxis(Axes[1]);//valeur de pression de l'input
+            if (MyGDNJ.telekynesysScript.Count == 0)
             {
                 DJ.DeplacementClassic(X, Z);// demande d'utiliser le systeme de depalcment calssic et lui transmet les valeurs necessaire
             }
@@ -151,16 +170,14 @@ public class InputSystem : PersonnalMethod
             {
                 DJ.DeplacementRoller(X, Z);
             }
-            //MyGDNJ.CC.Limitation(true);
-           
+            
+
 
         }
         else if (Input.GetAxis(Axes[0]) == 0 || Input.GetAxis(Axes[1]) == 0)
         {
-            //MyGDNJ.CC.Limitation(false);
+            
         }
-        
-      
     }
 
 

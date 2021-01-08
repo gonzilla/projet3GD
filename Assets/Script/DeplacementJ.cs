@@ -18,6 +18,8 @@ public class DeplacementJ : PersonnalMethod
     Rigidbody RbPlayer;// le component rigidbody
     GrappinV2 Grap;
     GestionDesDatasPlayer GDDP;
+    GestionDesFormes GDF;
+
 
     int nombreDeJump;
     void Start()
@@ -25,6 +27,7 @@ public class DeplacementJ : PersonnalMethod
         GoFindDataPlayer(out GDDP);
         RbPlayer = GetComponent<Rigidbody>();//Récupére le component rigidbody de l'objet
         Grap = GetComponent<GrappinV2>();
+        GDF = GetComponent<GestionDesFormes>();
     }
 
     
@@ -38,25 +41,25 @@ public class DeplacementJ : PersonnalMethod
         {
 
 
-            if (!GDDP.Vise)
+            if (!GDDP.Vise)//si je ne vise pas
             {
-                float targetAngle = Mathf.Atan2(X, Z) * Mathf.Rad2Deg + maCamera.transform.eulerAngles.y;
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                float targetAngle = Mathf.Atan2(X, Z) * Mathf.Rad2Deg + maCamera.transform.eulerAngles.y; // calcul de la rotation
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f); // set la rotation
             }
-            X = 0;
-           
+                 
             Vector2 ClampVelocitySpeed = new Vector2(X, Z);// à changer RbPlayer pour le jump //créer un vecteur pour la velocité
             float calculatedMagnitude = Mathf.Sqrt(X * X + Z * Z);//calcul de la magnitude
             if (calculatedMagnitude >= 1)// si la magnitude est supérrieur a 1
             {
                 ClampVelocitySpeed = ClampVelocitySpeed.normalized; //la remet a 1
             }
-            float signe = Z / Mathf.Abs(Z);
+            float signe = Z / Mathf.Abs(Z);// permet d'avoir le signe 
             ClampVelocitySpeed = ClampVelocitySpeed * F_SpeedDeplacementClassic;// multiplie celle par la valeur souhaiter
-            Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y*signe);
+            //Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, ClampVelocitySpeed.y*signe);
+            Vector3 FutureVelocity = new Vector3(0, RbPlayer.velocity.y, 1 * F_SpeedDeplacementClassic);
             RbPlayer.velocity = transform.TransformDirection(FutureVelocity);//fais en sorte qu'il le fasse de maniére local*/
 
-           // bug de x
+          
 
 
 
@@ -97,6 +100,28 @@ public class DeplacementJ : PersonnalMethod
        
 
     }
+
+    public void Dash(Ray raycam) 
+    {
+        Vector3 DirectionCam= raycam.GetPoint(GDDP.DistanceCaméraPoint); //point de visé
+        Vector3 DirectionDash = DirectionCam - transform.position;
+
+        RbPlayer.AddForce( DirectionDash.normalized*GDDP.ForceDash*RbPlayer.mass ,ForceMode.Impulse);
+        GDF.LancerDeBoule(-DirectionDash);
+
+
+        Debug.DrawRay(transform.position, DirectionDash * GDDP.DistanceCaméraPoint,Color.green);
+        Debug.DrawRay(transform.position, -DirectionDash * GDDP.DistanceCaméraPoint, Color.yellow);
+        
+        // récupére direction de la caméra
+        // calculer la direction du dash
+        // lancer les cubes en arriére
+        // lancer la force
+
+
+
+    }
+
 
     void OnCollisionEnter(Collision collision)
     {
