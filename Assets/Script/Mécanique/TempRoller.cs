@@ -43,6 +43,7 @@ public class TempRoller : PersonnalMethod
         else 
         {
             DJ.F_SpeedDeplacementRoller = SpeedRollerOriginal;
+            DJ.F_JumpForce = JumpForceOri;
         }
 
         
