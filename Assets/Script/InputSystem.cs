@@ -10,6 +10,7 @@ public class InputSystem : PersonnalMethod
     //hide in inspecteur= pas visible dans l'inspecteur
     //header fais une démarquation dans l'inspecteur
     public Camera MaCam;
+    public CinemachineChangement CC;
     public int LayerPetitCube;
     public GestionDesDatasPlayer GDDP;
     public KeyCode[] Touches; //tableau des touches                                      
@@ -23,6 +24,7 @@ public class InputSystem : PersonnalMethod
     public float timeMinMaintien;// temps à partir duquel on décide qu'une touche est maintenue volontairement 
     //Local variable
     //compenent pour lancements des effets des Inputs
+    [SerializeField] bool BobSleig;
     GestionDataNonJoueur MyGDNJ;
     GestionDesDatasPlayer MyGDDP;
     GestionDesFormes GDF;
@@ -46,7 +48,7 @@ public class InputSystem : PersonnalMethod
         CD = GetComponent<CubeDivision>();
         GDF = GetComponent<GestionDesFormes>();
         TR = GetComponent<TempRoller>();
-        EV =GameObject.Find("Gun").GetComponent<ElementsVisuelle>() ; 
+        EV = GetComponent<ElementsVisuelle>(); 
         MAJ_Tab();//met à jour la longueur des tableau 
         maskToIgnore= ~(1<< LayerPetitCube);//set la valeur du layer physique
     }
@@ -55,50 +57,58 @@ public class InputSystem : PersonnalMethod
     {
         
         Ray thisRay = MaCam.ScreenPointToRay(Input.mousePosition);// le ray
-                                                                  //Debug.DrawRay(MaCam.transform.position, thisRay.direction * 100, Color.red);
-        //MyGDNJ.CC.Mooving();
+        Debug.DrawRay(MaCam.transform.position, MaCam.transform.forward * 100, Color.red);
 
-        //MyGDNJ.CC.Limitation(true);
+        #region Input 0
         if (Input.GetKeyDown(Touches[0]))//si la touche 0 dans le tableau a été pressé
         {
-
-            if (hittedCam.transform.gameObject != null && hittedCam.transform.CompareTag("Destructible"))
+            TimePressionTouche[0] = Time.time + timeMinMaintien;
+        }
+        if (Input.GetKey(Touches[0]))
+        {
+            if (TimePressionTouche[0] < Time.time)
             {
-                if (!hittedCam.transform.GetComponent<CubeDivision>())//si l'objet n'a pas le script
-                {
-                    CD = hittedCam.transform.gameObject.AddComponent<CubeDivision>();//ajoute le script
-                   
-                }
-                else //sinon
-                {
-                    CD = hittedCam.transform.GetComponent<CubeDivision>();//recupére le script
-                }
-
-                CD.ActivateDivision();//dans le script CubeDivisions
-                TR.GestionRoller();//active dans script des rollers
-                hittedCam = new RaycastHit();
-                
+                GDDP.Vise = true;
+                CC.Viser();
             }
 
-
+        }
+        if (Input.GetKeyUp(Touches[0]))
+        {
+           
+            TimePressionTouche[0] = 0;
+            if (GDDP.Vise)
+            {
+               
+                if (Physics.Raycast(Camera.main.transform.position, thisRay.direction, out hittedCam, GDDP.DistanceMaxGrappin, maskToIgnore) && hittedCam.transform.CompareTag("Destructible"))
+                {
+                    if (hittedCam.transform!=null)
+                    {
+                        
+                        MyGDNJ.Gauche = true;
+                        EV.LanceGrappin(hittedCam.point, hittedCam);
+                    }
+                    
+                }
+                            
+            }
+            GDDP.Vise = false;
+            CC.StopViser();
+            hittedCam = new RaycastHit();
+            
 
         }
+        #endregion
         if (Input.GetKeyDown(Touches[1]))//si la touche 1 dans le tableau a été pressé
         {
             DJ.Jump();//lance le saut
-            Grap.Cancel();//cancel le grappin
+            //Grap.Cancel();//cancel le grappin
         }
         #region Input2
         if (Input.GetKeyDown(Touches[2]))// si la touche 2 dans le tableau a été pressé
         {
             TimePressionTouche[2] = Time.time + timeMinMaintien;
-            if (hittedCam.transform!=null)
-            {
-                Grap.Cancel();// annule le grappin (si y'en a déjà un)
-                Grap.RushTo(hittedCam);// déplace le joueur vers l'endroit visé
-                DJ.CanMoveBasic = false;//empeche le joueur de bouger
-                hittedCam = new RaycastHit();
-            }
+            
            
         }
         if (Input.GetKey(Touches[2]))
@@ -106,17 +116,27 @@ public class InputSystem : PersonnalMethod
             if (TimePressionTouche[2]<Time.time)
             {
                 GDDP.Vise = true;
+                CC.Viser();
             }
+            
         }
         if (Input.GetKeyUp(Touches[2]))
         {
+            
             TimePressionTouche[2] = 0;
             if (GDDP.Vise)
             {
-                Physics.Raycast(Camera.main.transform.position, thisRay.direction, out hittedCam, GDDP.DistanceMaxGrappin, maskToIgnore);
+                if (Physics.Raycast(Camera.main.transform.position, thisRay.direction, out hittedCam, GDDP.DistanceMaxGrappin, maskToIgnore) && Grap.EstIlGrappinable(hittedCam.transform.tag))
+                {
+                    MyGDNJ.Gauche = false;
+                    EV.LanceGrappin(hittedCam.point,hittedCam);
+                }
+                //Physics.Raycast(Camera.main.transform.position, thisRay.direction, out hittedCam, GDDP.DistanceMaxGrappin, maskToIgnore);              
             }
-           
             GDDP.Vise = false;
+            CC.StopViser();
+            hittedCam = new RaycastHit();
+            //DJ.CanMoveBasic = false;//empeche le joueur de bouger
             //je créer un lien si je fais click gauche je divise l'objet si possible
             //si je fais click droit je m'attire
 
@@ -162,22 +182,32 @@ public class InputSystem : PersonnalMethod
 
             float X = Input.GetAxis(Axes[0]);//valeur de pression de l'input
             float Z = Input.GetAxis(Axes[1]);//valeur de pression de l'input
-            if (MyGDNJ.telekynesysScript.Count == 0)
+            if (BobSleig)
             {
-                DJ.DeplacementClassic(X, Z);// demande d'utiliser le systeme de depalcment calssic et lui transmet les valeurs necessaire
+                DJ.BobsleigDeplacement(X, Z);
             }
-            else if (MyGDNJ.telekynesysScript.Count > 0)
+            else 
             {
-                DJ.DeplacementRoller(X, Z);
+                if (MyGDNJ.telekynesysScript.Count == 0)
+                {
+                    DJ.DeplacementClassic(X, Z);// demande d'utiliser le systeme de depalcment calssic et lui transmet les valeurs necessaire
+                }
+                else if (MyGDNJ.telekynesysScript.Count > 0)
+                {
+                    DJ.DeplacementRoller(X, Z);
+                }
             }
+            
             
 
 
         }
         else if (Input.GetAxis(Axes[0]) == 0 || Input.GetAxis(Axes[1]) == 0)
         {
-            
+            DJ.DeplacementCote();
         }
+
+       
     }
 
 
@@ -241,3 +271,22 @@ public class InputSystem : PersonnalMethod
 
             }
         }*/
+/*if (hittedCam.transform.gameObject != null && hittedCam.transform.CompareTag("Destructible")) // vieu clic gauche
+    {
+        print("je touche un cube");
+        if (!hittedCam.transform.GetComponent<CubeDivision>())//si l'objet n'a pas le script
+        {
+            CD = hittedCam.transform.gameObject.AddComponent<CubeDivision>();//ajoute le script
+
+        }
+        else //sinon
+        {
+            CD = hittedCam.transform.GetComponent<CubeDivision>();//recupére le script
+        }
+
+        CD.ActivateDivision();//dans le script CubeDivisions
+        TR.GestionRoller();//active dans script des rollers
+        hittedCam = new RaycastHit();
+
+    }
+    */

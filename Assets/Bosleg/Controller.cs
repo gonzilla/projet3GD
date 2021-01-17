@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour
         if (Input.GetAxis(vertical)!=0)
         {
             //rb.AddForce(Vector3.forward*speedX* Input.GetAxis(vertical)*Time.deltaTime,ForceMode.VelocityChange);
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, speedX * Input.GetAxis(vertical));
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -speedX * Input.GetAxis(vertical));
         }
     }
 }

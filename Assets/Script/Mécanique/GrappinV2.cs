@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrappinV2 : MonoBehaviour
+public class GrappinV2 : PersonnalMethod
 {
     //Script du grappin (nouveau)
     //Public variable
@@ -16,48 +16,52 @@ public class GrappinV2 : MonoBehaviour
     Rigidbody Rb;
     ConstantForce CF;
     LineRenderer LR;
+    GestionDataNonJoueur GDNJ;
     //Vector3 ExPosition;
 
     void Start()
     {
         Rb = GetComponent<Rigidbody>();
+        GoFindDataNonJoueur(out GDNJ);
         //ExPosition = transform.position;
     }
 
-    
+
     void Update()
     {
-       
+
         if (Activate)
         {
+           
             Direction = CordonnateToRush - transform.position;
 
             Rb.velocity = Direction.normalized * SpeedHook;
-            
-            UpdateLineRenderer();// update le line renderer
-            
+
+            //UpdateLineRenderer();// update le line renderer
+
 
         }
 
-      
+
     }
 
-    public void RushTo(RaycastHit Info) 
+    public void RushTo(RaycastHit Info)
     {
-        Destroy(LR);//detruit le line render
+        
+        //Destroy(LR);//detruit le line render
         Activate = true;//active
         //ObjetToGo = Info.transform.gameObject;
         CordonnateToRush = Info.point;//recupére la position
         Direction = CordonnateToRush - transform.position;//calcul de la direction
-       if (CF==null)//si il n y'a  pas une constante force
+        if (CF == null)//si il n y'a  pas une constante force
         {
             CF = this.gameObject.AddComponent<ConstantForce>();//ajoute une constante force
         }
-        setLineRenderer();//set le line render
-        CF.force = Vector3.up * 9.81f;// eneleve la gravité
-        
+        //setLineRenderer();//set le line render
+        CF.force = Vector3.up * 9.81f*2;// eneleve la gravité
+
     }
-    public void DeleteConstantforce() 
+    public void DeleteConstantforce()
     {
         Destroy(CF);// Destroy le component constant force
 
@@ -71,18 +75,17 @@ public class GrappinV2 : MonoBehaviour
             Activate = false;// desactive
             DeleteConstantforce(); // delete force constant force
         }
-        
-    
+
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Mur")|| collision.transform.CompareTag("Inmovable"))
-        {
-            Activate = false;
-            DeleteConstantforce();
-            Destroy(LR);
-        }
+        /*
+        Activate = false;
+        DeleteConstantforce();
+        Destroy(LR);*/
+
     }
 
     void setLineRenderer() //set le linerender
@@ -95,17 +98,32 @@ public class GrappinV2 : MonoBehaviour
             LR.startWidth = 0.25f;//la "grosseur" de corde
             LR.material = Mat_Corde;//met le material
         }
-        
+
     }
     void UpdateLineRenderer()// update le linerender
     {
-        if (LR!=null)
+        if (LR != null)
         {
             LR.SetPosition(0, transform.position);
         }
-        
+
     }
 
+    public bool EstIlGrappinable (string LeTag)   
+    {
+        bool renvoie = false;
+        foreach (string item in GDNJ.ListeDeTagObjetAccrochable)
+        {
+            if (LeTag==item)
+            {
+                renvoie = true;
+                break;
+                
+            }
+        }
+        return renvoie;
+
+    }
 }
 /*if (transform.position==ExPosition)
       {

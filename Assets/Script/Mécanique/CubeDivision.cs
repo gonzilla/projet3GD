@@ -37,13 +37,13 @@ public class CubeDivision : PersonnalMethod
     }
 
     
-    void Update()
+    /*void Update()
     {
         if (Activate)
         {
             ActivateDivision();
         }
-    }
+    }*/
 
     public void ActivateDivision() 
     {

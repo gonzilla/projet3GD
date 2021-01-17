@@ -27,6 +27,8 @@ public class GestionDesDatasPlayer : MonoBehaviour
 
     [Header("InputSystem")]
     [HideInInspector] public bool Vise=false;
+    
+
     //Local variable
 
     

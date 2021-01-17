@@ -10,7 +10,9 @@ public class DeplacementJ : PersonnalMethod
                              //public float F_SortieDeGrappin;
 
     public float F_SpeedDeplacementRoller;
-    
+
+    public float F_SpeedBobSleigueCote;
+    public float F_SpeedBobSleigue;
     public bool CanMoveBasic = true;
     public Camera maCamera;
     //public float MagnitudeMax;
@@ -19,8 +21,8 @@ public class DeplacementJ : PersonnalMethod
     GrappinV2 Grap;
     GestionDesDatasPlayer GDDP;
     GestionDesFormes GDF;
-
-
+    Vector3 directionEncote;
+    bool surLeSol;
     int nombreDeJump;
     void Start()
     {
@@ -87,6 +89,32 @@ public class DeplacementJ : PersonnalMethod
     */
 
 
+    public void BobsleigDeplacement(float X, float Z) 
+    {
+
+        RbPlayer.velocity = new Vector3(RbPlayer.velocity.x, RbPlayer.velocity.y, F_SpeedBobSleigueCote * -X);
+        //RbPlayer.AddForce(Vector3.left * Z * 1000*Time.deltaTime);
+
+    }
+
+    public void DeplacementCote() 
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position,Vector3.down,out hit,100, ~(1<<9)))
+        {
+            directionEncote = Vector3.Cross(Vector3.back, hit.normal).normalized * F_SpeedBobSleigue;
+           
+        }
+        //RbPlayer.AddForce(directionEncote.normalized * F_SpeedBobSleigue, ForceMode.VelocityChange);
+        if (surLeSol) 
+        {
+            Vector3 Vitesse = new Vector3(directionEncote.x, RbPlayer.velocity.y, directionEncote.z);
+            RbPlayer.velocity = Vitesse;
+        }
+       
+
+    }
+
     public void Jump() 
     {
         if (nombreDeJump<2)
@@ -125,24 +153,30 @@ public class DeplacementJ : PersonnalMethod
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.contacts[0].normal==Vector3.up)
+        if (collision.transform.CompareTag("Sol"))
         {
             nombreDeJump = 0;
-            CanMoveBasic = true;
+            surLeSol = true;
+            //CanMoveBasic = true;
         }
     }
     void OnCollisionExit(Collision collision)
     {
-       /* RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit,3f, ~(1<<9)))
+        /* RaycastHit hit;
+         if (Physics.Raycast(transform.position, Vector3.down, out hit,3f, ~(1<<9)))
+         {
+             if (hit.normal==Vector3.up)
+             {
+                 print("sores");
+                 OnGround = false;
+             }
+         }*/
+        if (collision.transform.CompareTag("Sol"))
         {
-            if (hit.normal==Vector3.up)
-            {
-                print("sores");
-                OnGround = false;
-            }
-        }*/
+            surLeSol = false;
+        }
     }
+   
 }
 /*if (RbPlayer.velocity.magnitude< VitesseMax)
            {

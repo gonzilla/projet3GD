@@ -6,6 +6,11 @@ public class GestionDataNonJoueur : MonoBehaviour
 {
     //Script pour modifier des variables communes (sur d'autre script que le joueur)
     //Public variable
+
+    [Header("Pour Tout Scipt")]
+    public GameObject Player;
+
+
     [Header("CubeDivisions")]
     public float ForceExplosions;
     public int NombreDecube; // le nombre de cube
@@ -32,7 +37,15 @@ public class GestionDataNonJoueur : MonoBehaviour
     public float F_tailleDuCube;
     public float F_VitesseElement;
     public Material Mat_materialImpact;
+    public Material Mat_Corde;
     public bool B_Coller;
+    public bool Gauche;
+
+
+    [Header("Grappin")]
+    public string[] ListeDeTagObjetAccrochable;
+
+    
 
     //Local variable
 

@@ -6,36 +6,48 @@ using Cinemachine;
 public class CinemachineChangement : MonoBehaviour
 {
     //Public variable
-    public Transform Player;
+    /*public Transform Player;
     public Transform Camera;
     public float AngleLimiteDeCam;
     public float LimAngleNeg = 0;
     public float LimAnglePos = 0;
     public float[] ValueRangeMoving;
     public float[] ValueRangeNotMoving;
-    public bool IsWrap;
+    public bool IsWrap;*/
+    public float ValueStartX;
+    public float ValueStartY;
     //Local variable
     CinemachineFreeLook CFL;
+
    
 
 
     void Start()
     {
         CFL = GetComponent<CinemachineFreeLook>();
-        LimAngleNeg = -AngleLimiteDeCam / 2;
-        LimAnglePos = AngleLimiteDeCam / 2;
+        //LimAngleNeg = -AngleLimiteDeCam / 2;
+        //LimAnglePos = AngleLimiteDeCam / 2;
+        
     }
 
     
     public void Viser() //quand je vise
     {
-    
+        CFL.m_YAxis.m_InputAxisName = "Mouse Y";
+        CFL.m_XAxis.m_InputAxisName = "Mouse X";
 
+    }
+    public void StopViser() 
+    {
+        CFL.m_YAxis.m_InputAxisName = "";
+        CFL.m_YAxis.Value = ValueStartY;
+        CFL.m_XAxis.m_InputAxisName = "";
+        CFL.m_XAxis.Value = ValueStartX;
 
     }
 
 
-    public void Mooving() //quand je bouge
+    /*public void Mooving() //quand je bouge
     {
         CFL.m_XAxis.m_Wrap = false;//wrap false
         CFL.m_XAxis.m_MinValue = ValueRangeMoving[0];// min value est égale à la min du tab1
@@ -72,11 +84,11 @@ public class CinemachineChangement : MonoBehaviour
 
             CFL.m_XAxis.Value = LimAnglePos + (angleActuelle * -sens);
 
-        }*/
+        }
 
-    }
+    }*/
 
-    public void Limitation(bool Moving) //quand je reste imobile
+    /*public void Limitation(bool Moving) //quand je reste imobile
     {
        
         if (Moving)// si je bouge
@@ -118,12 +130,12 @@ public class CinemachineChangement : MonoBehaviour
         /*if (angleJoueur>180f)
         {
             angleJoueurPourCAM = angleJoueur - 360f;
-        }*/
+        }
         //print(sens);
         
        
         ///CFL.m_XAxis.Value
-    }
+    }*/
 }
 //CFL.m_XAxis.m_Wrap = false;
 //calcul des valeurs + angles
