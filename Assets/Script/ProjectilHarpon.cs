@@ -67,7 +67,7 @@ public class ProjectilHarpon : PersonnalMethod
         if(Info.transform == null)
         {
             thisRay = myGDNJ.Cam.ScreenPointToRay(Input.mousePosition);// le ray
-            DirectionProjectile = thisRay.direction;//GetPoint(maxDistance) -transform.position ;//calcul la direction
+            DirectionProjectile = thisRay.GetPoint(maxDistance) -transform.position;//calcul la direction thisRay.direction;//
         }
        
         //Vector3 DirectionProjectile = thisRay.direction-transform.position;//calcul la direction
@@ -161,5 +161,13 @@ public class ProjectilHarpon : PersonnalMethod
         return DoitFaireUnTruc;
     }
    
+    float CalculDistancePourPoint() 
+    {
+        //calculate 
+        float distancePlAYERGUN = Vector3.Distance(GameObject.Find("Player").transform.position,PositionOriginille);
 
+        float distanceCalculer =  Mathf.Sqrt(Mathf.Pow(distancePlAYERGUN, 2)+ Mathf.Pow(maxDistance, 2));
+
+        return distanceCalculer;
+    }
 }

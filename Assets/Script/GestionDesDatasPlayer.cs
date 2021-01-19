@@ -28,7 +28,7 @@ public class GestionDesDatasPlayer : MonoBehaviour
     public float DistanceCameraPoint;
     public float ForceDash;
     public float NombreDeGrosCubeParDash;
-    [HideInInspector] public bool LanceUnAutreDepl;
+    //[HideInInspector] public bool LanceUnAutreDepl;
 
 
     [Header("InputSystem")]

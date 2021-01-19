@@ -54,7 +54,7 @@ public class InputSystem : PersonnalMethod
         
         Ray thisRay = MaCam.ScreenPointToRay(Input.mousePosition);// le ray
         Debug.DrawRay(MaCam.transform.position, MaCam.transform.forward * 100, Color.red);
-        Debug.DrawRay(GameObject.Find("SpawnGrappin").transform.position, thisRay.GetPoint(MyGDNJ.DistanceMaxGrappin), Color.cyan);
+        //Debug.DrawRay(GameObject.Find("SpawnGrappin").transform.position, thisRay.GetPoint(MyGDNJ.DistanceMaxGrappin), Color.cyan);
 
         //float distanceSup = MyGDNJ.DistanceMaxGrappin-Vector3.Distance(thisRay.GetPoint(MyGDNJ.DistanceMaxGrappin), GameObject.Find("SpawnGrappin").transform.position);
         //Debug.DrawRay(GameObject.Find("SpawnGrappin").transform.position, thisRay.GetPoint(MyGDNJ.DistanceMaxGrappin+Mathf.Pow(distanceSup,4))- GameObject.Find("SpawnGrappin").transform.position, Color.cyan);
@@ -101,8 +101,8 @@ public class InputSystem : PersonnalMethod
         #endregion
         if (Input.GetKeyDown(Touches[1]))//si la touche 1 dans le tableau a été pressé
         {
-            MyGDDP.LanceUnAutreDepl = true;
-            MyGDDP.DJ.Jump();//lance le saut
+            //MyGDDP.LanceUnAutreDepl = true;
+            //MyGDDP.DJ.Jump();//lance le saut
             //Grap.Cancel();//cancel le grappin
         }
         #region Input2
@@ -135,7 +135,7 @@ public class InputSystem : PersonnalMethod
             TimePressionTouche[2] = 0;
             if (MyGDNJ.MesPetitsCube.Count > 0)// si j'ai des cubes sur moi
             {
-                MyGDDP.LanceUnAutreDepl = true;
+                //MyGDDP.LanceUnAutreDepl = true;
                 MyGDDP.DJ.Dash(thisRay);//lance le dash
 
             }
@@ -208,51 +208,7 @@ public class InputSystem : PersonnalMethod
         return 0;
     }
 
-    Vector3 PositionViser(Vector3 PetitA) 
-    {
-        if (gun==null)
-        {
-            gun = GameObject.Find("SpawnGrappin").transform;
-        }
-        // A point du rayà la con
-        Vector3 A = PetitA;
-        // b =joueur
-        Vector3 B = transform.position;
-        // C = gun
-        Vector3 C = gun.position;
-        // E = Fin de projectil
-        Vector3 E = (A - C).normalized*MyGDNJ.DistanceMinGrappin;
-        //D Ce que je cherche a trouver Bordel
-        Vector3 D = Vector3.zero;
-        //bc
-        float BC = Vector3.Distance(B,C);
-        //Ba
-        float BA = Vector3.Distance(B, A);
-        //AC
-        float AC = Vector3.Distance(A, C);
-        // AE
-        float AE = Vector3.Distance(A, E);
-        //EB
-        float EB = Vector3.Distance(E,B);
-        //Angle B
-        float AngABC = Vector3.Angle(A-B,C-B);
-        float AngEBA = Vector3.Angle(E - B, A - B);
-        //Angle A
-        float AngBAC = Vector3.Angle(B-A,C-A);
-        float AngBAE = Vector3.Angle(B - A, E - A);
-        float AngBAD = 180 - AngBAC;
-        float AngEAD = 360 - (AngBAD + AngBAE + AngBAC);
-        //Angle C
-        float AngBCA = Vector3.Angle(B-C,A-C);
-       //Angle e
-        float AngBEA = Vector3.Angle(B-E,A-E);
-        
-        
-        
-        //float AngEDA = ;
-
-        return Vector3.zero;
-    }
+    
 
 
 

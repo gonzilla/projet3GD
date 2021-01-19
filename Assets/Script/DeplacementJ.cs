@@ -15,6 +15,7 @@ public class DeplacementJ : PersonnalMethod
     public float F_SpeedBobSleigueCote;
     public float F_SpeedBobSleigue;
     public float F_SpeedDash;
+    public float vitesseDecrementation;
     //public bool CanMoveBasic = true;
     [HideInInspector] public bool afterGrap = false;
     
@@ -51,13 +52,25 @@ public class DeplacementJ : PersonnalMethod
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 100, ~(1 << 9)))
         {
             directionEncote = Vector3.Cross(Vector3.back, hit.normal).normalized * F_SpeedBobSleigueCote;
+           
             Debug.DrawRay(transform.position, directionEncote);
         }
         //RbPlayer.AddForce(directionEncote.normalized * F_SpeedBobSleigue, ForceMode.VelocityChange);
-        if (surLeSol&&!GDDP.LanceUnAutreDepl)
+        if (surLeSol)//&&!GDDP.LanceUnAutreDepl
         {
-            Vector3 Vitesse = new Vector3(directionEncote.x, RbPlayer.velocity.y-9.81f, directionEncote.z);
-            RbPlayer.velocity = Vitesse ;
+            if (RbPlayer.velocity.magnitude<F_SpeedBobSleigueCote)
+            {
+                RbPlayer.AddForce(directionEncote, ForceMode.Force);
+            }
+            if (RbPlayer.velocity.magnitude>F_SpeedBobSleigueCote)
+            {
+                Vector3 Incroyable = RbPlayer.velocity;
+                float oldMagnitude = Incroyable.magnitude;
+                float newMagnitude =oldMagnitude - vitesseDecrementation*Time.deltaTime;
+                RbPlayer.velocity = RbPlayer.velocity.normalized * newMagnitude;
+            }
+            //Vector3 Vitesse = new Vector3(directionEncote.x, RbPlayer.velocity.y, directionEncote.z);
+            
         }
 
 
@@ -68,7 +81,7 @@ public class DeplacementJ : PersonnalMethod
         if (nombreDeJump < 2)
         {
             RbPlayer.AddForce(Vector3.up * F_JumpForce, ForceMode.Impulse);// applique une force impulse vers le haut
-            GDDP.LanceUnAutreDepl = false;
+            //GDDP.LanceUnAutreDepl = false;
             nombreDeJump++;
         }
 
@@ -80,14 +93,14 @@ public class DeplacementJ : PersonnalMethod
     public void Dash(Ray raycam)
     {
         //Enleve Du Poids
-        print("ff");
+        
         int NombreAEnlever = (int)Mathf.Pow(GDNJ.NombreDecube, 3)*(int)GDDP.NombreDeGrosCubeParDash;
         
         Vector3 DirectionCam = raycam.direction; //point de visé
         //Vector3 DirectionDash = DirectionCam - transform.position;
         GDDP.GDF.LancerDeCertainCube(-DirectionCam, NombreAEnlever);
         RbPlayer.AddForce(DirectionCam.normalized * F_SpeedDash*RbPlayer.mass, ForceMode.Impulse);
-        GDDP.LanceUnAutreDepl = false;
+        //GDDP.LanceUnAutreDepl = false;
 
         /*Vector3 DirectionCam = raycam.GetPoint(GDDP.DistanceCameraPoint); //point de visé
         Vector3 DirectionDash = DirectionCam - transform.position;
