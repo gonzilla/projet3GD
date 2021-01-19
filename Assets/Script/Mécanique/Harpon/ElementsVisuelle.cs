@@ -9,30 +9,26 @@ public class ElementsVisuelle : PersonnalMethod
     //Local variable
     GestionDataNonJoueur myGDNJ;
     GestionDesDatasPlayer myGDDP;
-    GrappinV2 Grap;
     GameObject ImpactPoint;
-    bool Once =false;
-   
-    Vector3 oldPosition;
     RaycastHit Info;
     LineRenderer LR;
     CubeDivision CD;
+    bool Once = false;
+
     void Start()
     {
         GoFindDataPlayer(out myGDDP);
         GoFindDataNonJoueur(out myGDNJ);
-        Grap = GetComponent<GrappinV2>();
-        CD = GetComponent<CubeDivision>();
+        
 
     }
 
-    public void LanceGrappin(Vector3 PointImact, RaycastHit InfoFrom) 
+    public void LanceGrappin( RaycastHit InfoFrom) 
     {
-        
         
         DestroyElementVisuelle();
         Info = InfoFrom;
-        
+        //OriginPostion = myGDNJ.Trans_PositionSpawn.position;
         ImpactPoint = GameObject.CreatePrimitive(PrimitiveType.Cube);//crée un cube
         ImpactPoint.transform.localScale = Vector3.one * myGDNJ.F_tailleDuCube; // lui donne la bonne taille
         ImpactPoint.transform.position = myGDNJ.Trans_PositionSpawn.position;
@@ -41,22 +37,37 @@ public class ElementsVisuelle : PersonnalMethod
         ImpactPoint.GetComponent<Collider>().isTrigger = true;//le met en trigger
         Rigidbody RB = ImpactPoint.AddComponent<Rigidbody>();//ajoute de la physique
         RB.useGravity = false;//pas de gravité
-        Vector3 DirectionProjectile = PointImact - transform.position;//calcul la direction
-        RB.AddForce(DirectionProjectile.normalized * myGDNJ.F_VitesseElement, ForceMode.Impulse);
+        //A enlever Lorsque j'ai un model satisfaisant
+        ProjectilHarpon PH = ImpactPoint.AddComponent<ProjectilHarpon>();
+        PH.Enclenche(RB, InfoFrom);
+        setLine();
+        //
+        //Vector3 DirectionProjectile = PointImact - transform.position;//calcul la direction
+        //RB.AddForce(DirectionProjectile.normalized * myGDNJ.F_VitesseElement, ForceMode.Impulse);
+        //oldPosition = ImpactPoint.transform.position;
         
-        oldPosition = ImpactPoint.transform.position;
-
     }
     public void DestroyElementVisuelle() 
     {
         if (ImpactPoint!=null)
         {
+           
             myGDNJ.B_Coller = false;
+            Destroy(LR);
             Destroy(ImpactPoint);
+
         }
         
     }
-     void Update()
+    void Update()
+    {
+        if (ImpactPoint != null)
+        {
+            actualiseLine();
+        }
+    }
+
+    /* void Update()
     {
         if (myGDNJ.B_Coller)
         {
@@ -87,19 +98,20 @@ public class ElementsVisuelle : PersonnalMethod
                 }
                 else
                 {
-                    Grap.RushTo(Info);// déplace le joueur vers l'endroit visé
+                    myGDNJ.Grap.RushTo(Info);// déplace le joueur vers l'endroit visé
                     //Info = new RaycastHit();
                 }
                
             }
         }
+       
         
-    }
+    }*/
 
-    void LateUpdate()
+    /*void LateUpdate()
     {
         
-        if (ImpactPoint!=null )
+        if (ImpactPoint!=null  )
         {
            
             float distance = Vector3.Distance(oldPosition, ImpactPoint.transform.position);//calcul la distance
@@ -121,11 +133,12 @@ public class ElementsVisuelle : PersonnalMethod
                 oldPosition = ImpactPoint.transform.position;
             }
         }
+       
         
         
 
         
-    }
+    }*/
 
     public void setLine() 
     {
@@ -136,7 +149,7 @@ public class ElementsVisuelle : PersonnalMethod
             LR.SetPosition(0, myGDNJ.Trans_PositionSpawn.position);//set le point 0
             LR.SetPosition(1, ImpactPoint.transform.position);//set le point 1
             LR.startWidth = 0.10f;//la "grosseur" de corde
-            //Once = false;
+            Once = false;
         }
         
     }
@@ -148,4 +161,22 @@ public class ElementsVisuelle : PersonnalMethod
 
     }
 
+
+    
 }
+
+ 
+
+
+
+
+
+
+/*if (ImpactPoint!=null)//si on veut une distance pour le grappin
+       {
+           if (Vector3.Distance(OriginPostion, ImpactPoint.transform.position) > CalculDistanceGrappin())
+           {
+
+               DestroyElementVisuelle();
+           }
+       }*/

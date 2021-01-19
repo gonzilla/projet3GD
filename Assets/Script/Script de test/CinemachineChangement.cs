@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CinemachineChangement : MonoBehaviour
+public class CinemachineChangement : PersonnalMethod
 {
     //Public variable
     /*public Transform Player;
@@ -18,9 +18,45 @@ public class CinemachineChangement : MonoBehaviour
     public float ValueStartY;
     //Local variable
     CinemachineFreeLook CFL;
+    bool recentreX = false;
+    bool recentreY = false;
+    GestionDataNonJoueur GDNJ;
+    GestionDesDatasPlayer GDDP;
 
-   
+    void start() 
+    {
+        GoFindDataNonJoueur(out GDNJ);
+        GoFindDataPlayer(out GDDP);
+    
+    }
 
+    /*private void Update()
+    {
+        if (recentreY)
+        {
+
+            CFL.m_YAxis.Value = Quaternion.Lerp(Quaternion.Euler(0, CFL.m_XAxis.Value, 0),
+                Quaternion.Euler(0, ValueStartX, 0), GDNJ.VitesseRetourX * Time.deltaTime).eulerAngles.y;
+
+            if (Mathf.Abs(CFL.m_XAxis.Value - ValueStartX) < 0.1f)
+            {
+
+                recentreX = false;
+            }
+        }
+        if (recentreX)
+        {
+            CFL.m_XAxis.Value =Quaternion.Lerp(Quaternion.Euler(CFL.m_YAxis.Value, 0 , 0),
+                Quaternion.Euler(ValueStartY, 0 , 0), GDNJ.VitesseRetourY * Time.deltaTime).eulerAngles.x;
+
+            if (Mathf.Abs(CFL.m_YAxis.Value - ValueStartY) < 0.1f)
+            {
+
+                recentreY = false;
+            }
+            
+        }
+    }*/
 
     void Start()
     {
@@ -35,16 +71,23 @@ public class CinemachineChangement : MonoBehaviour
     {
         CFL.m_YAxis.m_InputAxisName = "Mouse Y";
         CFL.m_XAxis.m_InputAxisName = "Mouse X";
+        recentreX = false;
+        recentreY = false;
 
     }
     public void StopViser() 
     {
+        Invoke("goog", 0.5f);
+    }
+
+    void goog() 
+    {
         CFL.m_YAxis.m_InputAxisName = "";
-        CFL.m_YAxis.Value = ValueStartY;
         CFL.m_XAxis.m_InputAxisName = "";
         CFL.m_XAxis.Value = ValueStartX;
-
+        CFL.m_YAxis.Value = ValueStartY;
     }
+
 
 
     /*public void Mooving() //quand je bouge
