@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{d41ffa45-f34d-476b-b617-a8e4d9238820}">
+		<property name="assetPath">
+			<value>explosion_objet_grincement.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.1119727891156463</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01b0b7a9-7f2b-4ed1-8a0f-4a386bf80826}</destination>
+		</relationship>
+	</object>
+</objects>

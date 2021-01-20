@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{a7c9ed91-b73d-4322-b058-25b1c2640309}">
+		<property name="assetPath">
+			<value>test_long_FurryRoller.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>11.926077097505669</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01b0b7a9-7f2b-4ed1-8a0f-4a386bf80826}</destination>
+		</relationship>
+	</object>
+</objects>

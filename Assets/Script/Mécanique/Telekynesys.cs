@@ -10,7 +10,7 @@ public class Telekynesys : PersonnalMethod
 
 
     //Local variable
-    //bool going = false;
+    
     Rigidbody RB;
     
     
@@ -21,13 +21,6 @@ public class Telekynesys : PersonnalMethod
           GoFindDataPlayer(out GDDP);
     }
 
-    void Start()
-    {
-        //RBcible = Cible.GetComponent<Rigidbody>();
-        
-    }
-
-    
     void Update()
     {
         if (GO)

@@ -16,6 +16,20 @@ public class PersonnalMethod : MonoBehaviour
         
     }
 
+    public static bool test(bool free, out string Montext) 
+    {
+        if (free)
+        {
+            Montext = "prends la rouge";
+            return false;
+        }
+        else 
+        {
+            Montext = "prends la bleue";
+            return true;
+        }
+        
+    }
 
     public static void GoFindDataNonJoueur(out GestionDataNonJoueur gdnj) 
     {
@@ -30,12 +44,12 @@ public class PersonnalMethod : MonoBehaviour
     {
         if (gddpFind == null)
         {
-            gddpFind = GameObject.Find("Joueur").GetComponent<GestionDesDatasPlayer>();
+            gddpFind = GameObject.Find("GestionData").GetComponent<GestionDesDatasPlayer>();
         }
         gddp = gddpFind;
 
     }
 
-
+    
    
 }

@@ -36,6 +36,58 @@ public class GestionDesFormes : PersonnalMethod
         MyGDNJ.MesPetitsCube.Clear();//clear  dans data
         Invoke("lancerDeBoolAfter",0.3f);
     }
+
+    public void LancerDeCertainCube(Vector3 DirectionDeDash, int NombreAlancer) 
+    {
+        if (MyGDNJ.telekynesysScript.Count>=Mathf.Pow(MyGDNJ.NombreDecube, 3))
+        {
+            List<int> IndexCeuxQuiSerontExpulser = new List<int>();
+            Telekynesys[] Expulser = new Telekynesys[NombreAlancer];
+            Rigidbody[] RBExpulser = new Rigidbody[NombreAlancer];
+            int Index = 0;
+            while (IndexCeuxQuiSerontExpulser.Count < NombreAlancer)
+            {
+                int toInclude = Random.Range(0, MyGDNJ.telekynesysScript.Count);
+                bool isInclude = false;
+                foreach (int ind in IndexCeuxQuiSerontExpulser)
+                {
+                    if (toInclude == ind)
+                    {
+                        isInclude = true;
+                        break;
+                    }
+                }
+                if (!isInclude)
+                {
+                    IndexCeuxQuiSerontExpulser.Add(toInclude);
+                    Expulser[Index] = MyGDNJ.telekynesysScript[toInclude];
+                    RBExpulser[Index] = MyGDNJ.MesPetitsCube[toInclude];
+                    Index++;
+                }
+            }
+            for (int i = 0; i < IndexCeuxQuiSerontExpulser.Count; i++)
+            {
+                MyGDNJ.MesPetitsCube.Remove(RBExpulser[i]);
+                MyGDNJ.telekynesysScript.Remove(Expulser[i]);
+            }
+
+            foreach (Telekynesys item in Expulser)
+            {
+                item.GO = false;// lui dis d'arreter à la position
+            }
+            foreach (Rigidbody Cubies in RBExpulser)
+            {
+
+                Cubies.AddForce(DirectionDeDash * ForceDeLancer, ForceMode.Impulse);// lui donne une force pour l'expulser
+            }
+        }
+        else 
+        {
+            LancerDeBoule(DirectionDeDash);
+
+        }
+
+    }
      
     void lancerDeBoolAfter() 
     {

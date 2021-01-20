@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TempRoller : PersonnalMethod
-{
+{/*
     //Script pour les "Rollers"
     //Public variable
     public GameObject roller1, Roller2;
@@ -77,7 +77,7 @@ public class TempRoller : PersonnalMethod
     }
 
 
-    void setValueInitial() // récupére les variables dans leurs états d'origine
+    /*void setValueInitial() // récupére les variables dans leurs états d'origine
     {
         GoFindDataNonJoueur(out MyGDNJ);//methode perso
         GoFindDataPlayer(out MyGDDP);//methode perso
@@ -88,7 +88,7 @@ public class TempRoller : PersonnalMethod
         SpeedRollerOriginal = DJ.F_SpeedDeplacementRoller;
         JumpForceOri = DJ.F_JumpForce;
 
-        InitialDistanceGrappin = MyGDDP.DistanceMaxGrappin;
+        //InitialDistanceGrappin = MyGDDP.DistanceMaxGrappin;
         InitialForcejump = DJ.F_JumpForce;
         InitialSpeedDeplacement = DJ.F_SpeedDeplacementClassic;
         intitalSpeedHook = G2.SpeedHook;
@@ -107,8 +107,8 @@ public class TempRoller : PersonnalMethod
             Roller2.SetActive(true);
         }
     
-    }
-}
+    }*/
+
 //Précédent systeme V1
 /*if (MyGDNJ.MesPetitsCube.Count>0 && MyGDNJ.MesPetitsCube.Count <28)
        {

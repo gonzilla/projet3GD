@@ -6,6 +6,13 @@ public class GestionDesDatasPlayer : MonoBehaviour
 {
     //Script pour modifier des variables communes (pour script sur le joueur)
     //Public variable
+
+    public GestionDesFormes GDF;
+    public DeplacementJ DJ;
+    public GestionDuPoids GDP;
+
+
+
     [Header("Telekinesys")]
     public float SpeedTelekinesy;
     public float TempsAvantDebutTelekinesy;
@@ -14,20 +21,20 @@ public class GestionDesDatasPlayer : MonoBehaviour
     public bool Using_Tele;
     
 
-    [Header("Grappin")]
-    public float DistanceMaxGrappin;
-
-    //[Header("Autre")]
-    //public bool InAir;
+    
 
     [Header("Déplacement")]
     public float SpeedRoller;
-    public float DistanceCaméraPoint;
+    public float DistanceCameraPoint;
     public float ForceDash;
+    public float NombreDeGrosCubeParDash;
+    //[HideInInspector] public bool LanceUnAutreDepl;
+
 
     [Header("InputSystem")]
     [HideInInspector] public bool Vise=false;
-    //Local variable
+    [HideInInspector] public float tauxMaintien;
 
+    
     
 }

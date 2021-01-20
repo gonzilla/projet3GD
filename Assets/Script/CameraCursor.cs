@@ -15,8 +15,5 @@ public class CameraCursor : MonoBehaviour
     }
 
     
-    void Update()
-    {
-        
-    }
+    
 }

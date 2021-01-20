@@ -24,30 +24,17 @@ public class CubeDivision : PersonnalMethod
     {
        
         GoFindDataNonJoueur(out GDNJ);// methode personnel
-    }
-
-    void Start()
-    {
-
         LengthOriginel = transform.localScale.x;//GetComponent<MeshRenderer>().bounds.size.x; // vas chercher la taille du cube
-        lengthOfNewCube = LengthOriginel / GDNJ.NombreDecube; // la taille du nouveau cube
-        
+        lengthOfNewCube = LengthOriginel / (float)GDNJ.NombreDecube; // la taille du nouveau cube
        
-
     }
 
-    
-    void Update()
-    {
-        if (Activate)
-        {
-            ActivateDivision();
-        }
-    }
+   
+
 
     public void ActivateDivision() 
     {
-       
+
         
         for (int x = 0; x < GDNJ.NombreDecube; x++) // triple pour ligne/colonne/profondeur
         {
@@ -59,7 +46,7 @@ public class CubeDivision : PersonnalMethod
                 }
             }
         }
-        
+       
         Activate = false;//A fini la subdivision
         GenerateExplosions();//fais l'explosion
         Destroy(this.gameObject); // Détruit l'objet
@@ -68,13 +55,11 @@ public class CubeDivision : PersonnalMethod
 
     void createMiniCube(Vector3 cordonnate) // fonction créer le cube
     {
-
+        
         //le parent objet vide
 
         GameObject CUBE = GameObject.CreatePrimitive(PrimitiveType.Cube);//creer le cube
-        
-        //CUBE.transform.parent = this.gameObject.transform;
-        CUBE.layer = LayerCube;//set le layer du cube
+        CUBE.layer = 8;//set le layer du cube
         CubeExplosions.Add(CUBE);//ajout le game object dans la liste
         Telekynesys Tele = CUBE.AddComponent<Telekynesys>();//lui ajoute le scrypte de telekynesis
         GDNJ.telekynesysScript.Add(Tele);// ajoute la ref dans les data
@@ -91,7 +76,7 @@ public class CubeDivision : PersonnalMethod
 
     void GenerateExplosions() 
     {
-        //print("explosions");
+        
         foreach (GameObject petitCube in CubeExplosions)
         {
             

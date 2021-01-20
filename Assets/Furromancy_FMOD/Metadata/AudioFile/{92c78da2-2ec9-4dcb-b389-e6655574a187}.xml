@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{92c78da2-2ec9-4dcb-b389-e6655574a187}">
+		<property name="assetPath">
+			<value>quand_le_harpon_se_plante_dans_un_objet.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0565079365079366</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{01b0b7a9-7f2b-4ed1-8a0f-4a386bf80826}</destination>
+		</relationship>
+	</object>
+</objects>
